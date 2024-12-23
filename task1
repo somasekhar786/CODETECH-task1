@@ -1,0 +1,98 @@
+-- in this task to create library management system, first we need to create a database
+called employees--
+create database employees;
+
+--For using the database we use below command--
+use employees;
+
+--In employees database, we created a table named books consists of different
+colomn headings and their datatypes with some constraints like book_id int etc..--
+
+create table books (
+	book_id int primary key,
+    title varchar(100) not null,
+    author varchar(100) not null,
+    genre varchar(100),
+    publication_year int,
+    available boolean default true
+);
+
+--we create another table as we know that  names mentioned in the task named members consists of different
+colomn headings and their datatypes with some constraints like member_id int etc..--
+
+create table members(
+	member_id int primary key,
+    first_name varchar(100),
+    last_name varchar(100),
+    dob date,
+    email varchar(100) unique,
+    join_date date
+);
+
+--at final we create table named transactions in the database which consisting of colomn headings and their
+datatypes with some constraints like tranasaction_id int etc..--
+
+create table transactions (
+	transaction_id int primary key,
+    book_id int,
+    member_id int,
+    borrow_date date,
+    return_date date,
+    foreign key (book_id) references books(book_id),
+    foreign key (member_id) references members(member_id)
+);
+
+--after creating the tables we need to insert the data into empty tables to store data--
+--for inserting data we use below query syntax to insert data in above created tables--
+
+insert into books(book_id,title,author,genre,publication_year)values
+(1,'preama','cupid','romance',2000),
+(2, '1984', 'George Orwell', 'Dystopian', 1949),
+(3, 'To Kill a Mockingbird', 'Harper Lee', 'Fiction', 1960),
+(4,'intersteller','willims','sci-fi',2010);
+
+insert into members(member_id,first_name,last_name,dob,email,join_date)values
+(10,'jhon','wick','1954-10-4','jhonwick@gmail.com',null),
+(11,'shakes','speare','1978-05-23','shakesspeare@gmail.com','2000-11-12'),
+(12, 'Alice', 'Johnson', '1990-01-15', 'alice.johnson@example.com', '2023-01-01'),
+(14, 'Bob', 'Smith', '1985-05-25', 'bob.smith@example.com', '2023-02-15');
+
+insert into transactions(transaction_id,book_id,member_id,borrow_date,return_date)values
+(1, 1, 10, '2023-03-01', NULL),
+(2, 2, 11, '2023-03-05', '2023-03-20'),
+(3,3,12,'2024-06-23',null),
+(4,4,14,'1990-11-20',null);
+
+--for getting the data that is stored in tables we use below syntax--
+
+select * from books;
+
+select * from members;
+
+select * from transactions;
+
+--for updating the data in tables we use below syntax--
+
+UPDATE books
+SET available = FALSE
+WHERE book_id = 1;
+
+--for deleting the data in tables we use below syntax--
+
+DELETE FROM members
+WHERE member_id = 2;
+
+--for getting the books borrowed by a specific member we use below syntax--
+
+SELECT b.title, b.author, t.borrow_date, t.return_date FROM books b
+JOIN transactions t ON b.book_id = t.book_id
+WHERE t.member_id = 11;
+
+--this query is designed to retrieve a list of books that have been borrowed 
+but not yet returned, including information about the book,
+the borrowing member, and the transaction details.--
+
+SELECT b.title, b.author, m.first_name, m.last_name, t.borrow_date, t.return_date FROM books b
+JOIN transactions t ON b.book_id = t.book_id
+JOIN members m ON t.member_id = m.member_id
+WHERE t.return_date IS NULL;
