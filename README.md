@@ -35,11 +35,11 @@ The objective of this project is to streamline library operations, enhance user 
              Corporation.
   
 ### key insights
-- **Inventory management**:-Track available, borrowed, and reserved books.
-                           -Identify popular titles to guide purchasing decisions.
-- **Member insights**:-Analyze member borrowing habits.
-                      -Understand member demographics for targeted services.
-- **Transaction analysis**:-Send automated reminders for due dates.
-                           -Identify overdue items and calculate fines.
-- **Usage analytics**:-Report on overall library usage and peak hours.
-                      -Afnalyze the use of digital resources and physical space.
+- **Inventory management**:Track available, borrowed, and reserved books.
+                           Identify popular titles to guide purchasing decisions.
+- **Member insights**:Analyze member borrowing habits.
+                      Understand member demographics for targeted services.
+- **Transaction analysis**:Send automated reminders for due dates.
+                           Identify overdue items and calculate fines.
+- **Usage analytics**:Report on overall library usage and peak hours.
+                      Afnalyze the use of digital resources and physical space.
